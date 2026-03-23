@@ -1,0 +1,9 @@
+export { default as NavBar } from './NavBar';
+export { default as Footer } from './Footer';
+export { default as HeroSection } from './HeroSection';
+export { default as DomainSection } from './DomainSection';
+export { default as ProjectCard } from './ProjectCard';
+export { default as SocialLinks } from './SocialLinks';
+export { default as ActivitySection } from './ActivitySection';
+export { default as SpotifyCard } from './SpotifyCard';
+export { default as AnimeCard } from './AnimeCard';
