@@ -31,7 +31,16 @@
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+| Gate | Principle | Status |
+|------|-----------|--------|
+| All new pages are statically pre-renderable (no per-request server logic) | I. Static-First | ☐ |
+| No `any` types; `strict: true` remains enabled in tsconfig.json | II. TypeScript Strict Mode | ☐ |
+| All styling uses TailwindCSS utility classes; no new CSS files outside globals.css | III. TailwindCSS for All Styling | ☐ |
+| `"use client"` used only where browser APIs / stateful hooks are strictly required | IV. Server Components by Default | ☐ |
+| Semantic HTML used; images go via `<Image>`; interactive elements are keyboard-accessible | V. Accessibility & Performance | ☐ |
+| No new third-party packages added without documented justification | Technology Stack | ☐ |
+| Names are descriptive; components have a single responsibility; no commented-out code | VI. Readability, Clarity & Architecture | ☐ |
+| No premature abstractions; new abstractions justified by 3+ repetitions | VI. Readability, Clarity & Architecture | ☐ |
 
 ## Project Structure
 
