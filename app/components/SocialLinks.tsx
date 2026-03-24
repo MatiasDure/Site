@@ -6,7 +6,7 @@ export default function SocialLinks({ className }: SocialLinksProps) {
   return (
     <div className={`flex items-center gap-4 ${className ?? ''}`}>
       <a
-        href="https://linkedin.com/in/yourprofile"
+        href="https://www.linkedin.com/in/matias-dure-207baa227/"
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Visit my LinkedIn profile"
@@ -24,7 +24,7 @@ export default function SocialLinks({ className }: SocialLinksProps) {
         </svg>
       </a>
       <a
-        href="https://github.com/yourprofile"
+        href="https://github.com/MatiasDure"
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Visit my GitHub profile"
