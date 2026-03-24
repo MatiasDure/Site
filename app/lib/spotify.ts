@@ -41,7 +41,6 @@ export async function getRecentlyPlayed(): Promise<SpotifyTrack | null> {
     });
 
     if (!response.ok) return null;
-
     const data = (await response.json()) as {
       items: Array<{
         track: {
@@ -60,7 +59,8 @@ export async function getRecentlyPlayed(): Promise<SpotifyTrack | null> {
       artist: item.track.artists[0]?.name ?? 'Unknown',
       albumArt: item.track.album.images[0]?.url ?? '',
     };
-  } catch {
+  } catch (ex) {
+    console.error((ex as Error).message);
     return null;
   }
 }
