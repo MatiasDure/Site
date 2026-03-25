@@ -1,10 +1,12 @@
-import { getRecentlyPlayed, getFavoriteAnime } from '@/app/lib';
+import { getFavoriteAnime, getSpotifyActivity } from '@/app/lib';
+
+import { SPOTIFY_ACTIVITY_HEADING, SPOTIFY_EMPTY_STATE_LABEL } from '@/app/lib/spotify.constants';
 import SpotifyCard from './SpotifyCard';
 import AnimeCard from './AnimeCard';
 
 export default async function ActivitySection() {
   const [track, animeEntries] = await Promise.all([
-    getRecentlyPlayed(),
+    getSpotifyActivity(),
     getFavoriteAnime(),
   ]);
 
@@ -21,13 +23,13 @@ export default async function ActivitySection() {
 
       <div className="mb-6">
         <h3 className="mb-3 text-sm font-medium uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
-          Last Played
+          {SPOTIFY_ACTIVITY_HEADING}
         </h3>
         {track ? (
           <SpotifyCard track={track} />
         ) : (
           <p className="text-sm text-zinc-500 dark:text-zinc-400">
-            No recent track data available.
+            {SPOTIFY_EMPTY_STATE_LABEL}
           </p>
         )}
       </div>

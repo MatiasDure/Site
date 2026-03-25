@@ -1,17 +1,19 @@
 <!--
 SYNC IMPACT REPORT
 ==================
-Version change: 1.0.0 → 1.1.0
-Type: MINOR (new principle VI added)
+Version change: 1.1.0 → 1.2.0
+Type: MINOR (Principle VI materially expanded with constants rule)
 
-Modified principles: None
-Added sections: Core Principles VI. Readability, Clarity & Architecture
+Modified principles: VI. Readability, Clarity & Architecture → VI. Readability, Clarity & Architecture
+Added sections: None
 Removed sections: None
 
 Templates review:
-- .specify/templates/plan-template.md  ✅ Constitution Check gate added for Principle VI
-- .specify/templates/spec-template.md  ✅ No structural changes required
-- .specify/templates/tasks-template.md ✅ No structural changes required
+- .specify/templates/plan-template.md  ✅ Updated Constitution Check with constants rule
+- .specify/templates/spec-template.md  ✅ Reviewed; no structural changes required
+- .specify/templates/tasks-template.md ✅ Reviewed; no structural changes required
+- .specify/templates/commands/*.md     ✅ Not present; no action required
+- README.md                            ✅ Reviewed; no changes required
 
 Deferred TODOs: None.
 -->
@@ -85,6 +87,11 @@ Code MUST be written for humans first. The following rules apply:
   - Page segments co-locate their own sub-components in the segment directory.
 - **No premature abstraction**: Abstractions MUST only be introduced when a pattern is repeated
   at least three times. YAGNI applies — do not build for hypothetical future requirements.
+- **Constants**: Magic numbers, string literals, timing values, size thresholds, route fragments,
+  and similar configuration-like values MUST NOT float inside components when they influence
+  rendering logic, layout, or behavior. Reusable or meaningful values MUST be moved into an
+  appropriate constants module with descriptive names located alongside the relevant feature or
+  in a shared constants file when used across multiple features.
 - **Comments**: Code MUST be self-documenting. Comments MUST explain *why*, never *what*.
   Commented-out code MUST NOT be committed.
 - **Imports**: Barrel files (`index.ts`) are PERMITTED only for `app/components/` and
@@ -134,4 +141,4 @@ arise between this document and any other guideline, this document prevails.
 All implementation plans (`plan.md`) MUST include a "Constitution Check" section that validates
 the feature against these principles before Phase 0 research begins.
 
-**Version**: 1.1.0 | **Ratified**: 2026-03-23 | **Last Amended**: 2026-03-23
+**Version**: 1.2.0 | **Ratified**: 2026-03-23 | **Last Amended**: 2026-03-25

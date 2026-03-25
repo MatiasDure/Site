@@ -1,2 +1,7 @@
 export type { Domain, Project } from './project';
-export type { SpotifyTrack, AnimeEntry } from './activity';
+export type {
+	SpotifyTrack,
+	SpotifyPlaybackState,
+	SpotifyActivitySource,
+	AnimeEntry,
+} from './activity';
