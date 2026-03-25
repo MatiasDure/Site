@@ -10,7 +10,7 @@ export default function SocialLinks({ className }: SocialLinksProps) {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Visit my LinkedIn profile"
-        className="rounded text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-500"
+        className="rounded text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -28,7 +28,7 @@ export default function SocialLinks({ className }: SocialLinksProps) {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Visit my GitHub profile"
-        className="rounded text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-500"
+        className="rounded text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

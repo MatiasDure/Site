@@ -1,7 +1,9 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import { NavBar, Footer } from "@/app/components";
+import type { Metadata } from 'next';
+import Script from 'next/script';
+import { Geist, Geist_Mono } from 'next/font/google';
+import './globals.css';
+import { Footer, NavBar } from '@/app/components';
+import { createThemeBootstrapScript } from '@/app/lib';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,9 +29,13 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col bg-white dark:bg-zinc-900">
+      <body className="flex min-h-full flex-col bg-background text-foreground">
+        <Script id="theme-bootstrap" strategy="beforeInteractive">
+          {createThemeBootstrapScript()}
+        </Script>
         <NavBar />
         {children}
         <Footer />

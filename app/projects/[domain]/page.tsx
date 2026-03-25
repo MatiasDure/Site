@@ -27,22 +27,22 @@ export default async function DomainProjectsPage({ params }: PageProps) {
   const projects = await getAllProjects(typedDomain);
 
   return (
-    <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-10">
+    <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-10 text-foreground">
       <div className="mb-8 flex items-center gap-3">
         <Link
           href="/"
-          className="text-sm text-zinc-500 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-500"
+          className="text-sm text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         >
           &larr; Home
         </Link>
-        <span className="text-zinc-300 dark:text-zinc-600" aria-hidden="true">/</span>
-        <h1 className="text-2xl font-bold text-zinc-900 dark:text-zinc-100">
+        <span className="text-border" aria-hidden="true">/</span>
+        <h1 className="text-2xl font-bold text-foreground">
           {DOMAIN_LABELS[typedDomain]}
         </h1>
       </div>
 
       {projects.length === 0 ? (
-        <p className="text-zinc-500 dark:text-zinc-400">
+        <p className="text-muted-foreground">
           No projects yet in this domain. Check back soon!
         </p>
       ) : (
