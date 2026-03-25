@@ -40,6 +40,7 @@
 | Semantic HTML used; images go via `<Image>`; interactive elements are keyboard-accessible | V. Accessibility & Performance | ☐ |
 | No new third-party packages added without documented justification | Technology Stack | ☐ |
 | Names are descriptive; components have a single responsibility; no commented-out code | VI. Readability, Clarity & Architecture | ☐ |
+| Magic values are extracted into descriptive constants files instead of floating in components | VI. Readability, Clarity & Architecture | ☐ |
 | No premature abstractions; new abstractions justified by 3+ repetitions | VI. Readability, Clarity & Architecture | ☐ |
 
 ## Project Structure
