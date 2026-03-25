@@ -12,7 +12,7 @@ export default async function HomePage() {
   );
 
   return (
-    <main className="mx-auto w-full max-w-5xl flex-1 px-4">
+    <main className="mx-auto w-full max-w-5xl flex-1 px-4 text-foreground">
       <HeroSection />
       <ActivitySection />
       {DOMAINS.map((domain, i) => (

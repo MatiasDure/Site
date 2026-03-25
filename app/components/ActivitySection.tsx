@@ -16,36 +16,36 @@ export default async function ActivitySection() {
     <section className="py-8" aria-labelledby="activity-heading">
       <h2
         id="activity-heading"
-        className="mb-5 text-xl font-semibold text-zinc-900 dark:text-zinc-100"
+        className="mb-5 text-xl font-semibold text-foreground"
       >
         Currently into
       </h2>
 
       <div className="mb-6">
-        <h3 className="mb-3 text-sm font-medium uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
+        <h3 className="mb-3 text-sm font-medium uppercase tracking-wide text-muted-foreground">
           {SPOTIFY_ACTIVITY_HEADING}
         </h3>
         {track ? (
           <SpotifyCard track={track} />
         ) : (
-          <p className="text-sm text-zinc-500 dark:text-zinc-400">
+          <p className="max-w-xl text-sm text-muted-foreground">
             {SPOTIFY_EMPTY_STATE_LABEL}
           </p>
         )}
       </div>
 
       <div>
-        <h3 className="mb-3 text-sm font-medium uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
+        <h3 className="mb-3 text-sm font-medium uppercase tracking-wide text-muted-foreground">
           Favourite Anime
         </h3>
         {topAnime.length > 0 ? (
-          <div className="grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-5">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
             {topAnime.map((entry) => (
               <AnimeCard key={entry.url} entry={entry} />
             ))}
           </div>
         ) : (
-          <p className="text-sm text-zinc-500 dark:text-zinc-400">
+          <p className="max-w-xl text-sm text-muted-foreground">
             No anime data available.
           </p>
         )}

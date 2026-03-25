@@ -4,9 +4,9 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-zinc-200 bg-white dark:border-zinc-700 dark:bg-zinc-900">
+    <footer className="border-t border-border bg-background">
       <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-4 px-4 py-6 sm:flex-row">
-        <p className="text-sm text-zinc-500 dark:text-zinc-400">
+        <p className="text-sm text-muted-foreground">
           &copy; {year} Matias Dure. All rights reserved.
         </p>
         <SocialLinks />

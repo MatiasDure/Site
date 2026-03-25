@@ -154,8 +154,6 @@ async function fetchSpotifyResource(accessToken: string, endpoint: string): Prom
 async function getCurrentlyPlaying(accessToken: string): Promise<SpotifyTrack | null> {
   const response = await fetchSpotifyResource(accessToken, SPOTIFY_CURRENTLY_PLAYING_ENDPOINT);
 
-  console.log(response);
-
   if (response.status === 204 || !response.ok) {
     return null;
   }

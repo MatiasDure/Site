@@ -20,13 +20,13 @@ export default function DomainSection({ domain, featuredProjects }: DomainSectio
       <div className="mb-4 flex items-baseline justify-between">
         <h2
           id={`heading-${domain}`}
-          className="text-xl font-semibold text-zinc-900 dark:text-zinc-100"
+          className="text-xl font-semibold text-foreground"
         >
           {DOMAIN_LABELS[domain]}
         </h2>
         <Link
           href={`/projects/${domain}`}
-          className="text-sm text-zinc-500 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-500"
+          className="text-sm text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         >
           View all projects &rarr;
         </Link>
