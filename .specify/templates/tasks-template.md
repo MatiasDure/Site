@@ -238,6 +238,16 @@ With multiple developers:
    - Developer C: User Story 3
 3. Stories complete and integrate independently
 
+### Multi-Agent Dispatch Strategy
+
+When task implementation is explicitly distributed across sub-agents before coding begins:
+
+1. One dispatcher agent MUST group tasks that can be worked on together without shared-file conflicts.
+2. The dispatcher MUST record active assignments in `specs/[###-feature-name]/task-distribution.md` and follow `.specify/memory/subagent-dispatch.md`.
+3. Every worker agent MUST read `.specify/memory/task-distribution.md` and `specs/[###-feature-name]/task-distribution.md` before implementation.
+4. Every worker agent MUST create and use a dedicated git worktree on a new, goal-oriented branch before editing files.
+5. Shared-file overlap or assignment changes MUST be resolved by the dispatcher before workers continue.
+
 ---
 
 ## Notes

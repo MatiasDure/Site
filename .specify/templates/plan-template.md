@@ -42,6 +42,7 @@
 | Names are descriptive; components have a single responsibility; no commented-out code | VI. Readability, Clarity & Architecture | ☐ |
 | Magic values are extracted into descriptive constants files instead of floating in components | VI. Readability, Clarity & Architecture | ☐ |
 | No premature abstractions; new abstractions justified by 3+ repetitions | VI. Readability, Clarity & Architecture | ☐ |
+| If multi-agent task distribution is requested, `specs/[###-feature-name]/task-distribution.md` exists and dispatcher/worker workflow docs will be followed | Multi-Agent Task Distribution | ☐ |
 
 ## Project Structure
 
@@ -49,6 +50,7 @@
 
 ```text
 specs/[###-feature]/
+├── task-distribution.md # Active multi-agent assignment ledger for this spec
 ├── plan.md              # This file (/speckit.plan command output)
 ├── research.md          # Phase 0 output (/speckit.plan command)
 ├── data-model.md        # Phase 1 output (/speckit.plan command)

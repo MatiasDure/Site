@@ -1,19 +1,22 @@
 <!--
 SYNC IMPACT REPORT
 ==================
-Version change: 1.1.0 → 1.2.0
-Type: MINOR (Principle VI materially expanded with constants rule)
+Version change: 1.3.0 → 1.4.0
+Type: MINOR (moved active multi-agent distribution from shared memory to per-spec files)
 
-Modified principles: VI. Readability, Clarity & Architecture → VI. Readability, Clarity & Architecture
+Modified principles: None
 Added sections: None
 Removed sections: None
 
-Templates review:
-- .specify/templates/plan-template.md  ✅ Updated Constitution Check with constants rule
-- .specify/templates/spec-template.md  ✅ Reviewed; no structural changes required
-- .specify/templates/tasks-template.md ✅ Reviewed; no structural changes required
-- .specify/templates/commands/*.md     ✅ Not present; no action required
-- README.md                            ✅ Reviewed; no changes required
+Templates requiring updates:
+- .specify/templates/plan-template.md              ✅ Updated spec directory layout and multi-agent gate
+- .specify/templates/spec-template.md              ✅ Reviewed; no structural changes required
+- .specify/templates/tasks-template.md             ✅ Updated multi-agent execution guidance
+- .specify/templates/task-distribution-template.md ✅ Added per-spec active distribution template
+- .specify/templates/commands/*.md                 ✅ Not present; no action required
+- .specify/scripts/bash/create-new-feature.sh      ✅ Updated spec scaffolding to generate per-spec distribution files
+- AGENTS.md                                        ✅ Updated runtime guidance to point at protocol + spec-local ledger
+- README.md                                        ✅ Reviewed; no changes required
 
 Deferred TODOs: None.
 -->
@@ -122,9 +125,24 @@ new packages. Each new package addition MUST be justified in the PR description.
 3. **Lint gate**: `npm run lint` MUST exit with zero errors before any PR is merged.
 4. **Build gate**: `npm run build` MUST succeed (no TypeScript errors, no broken static export)
    before any PR is merged.
-6. All components MUST live under `app/` following Next.js App Router conventions. Shared
+5. All components MUST live under `app/` following Next.js App Router conventions. Shared
    components belong in `app/components/`; page-specific components co-locate with their page
    segment directory.
+
+## Multi-Agent Task Distribution
+
+If task implementation is explicitly distributed across sub-agents before coding begins, the
+repository MUST use a single dispatcher and one or more worker sub-agents. The dispatcher MUST
+follow [subagent-dispatch.md](./subagent-dispatch.md) to group compatible tasks, assign workers,
+and keep the active distribution current. Every worker sub-agent MUST read
+[task-distribution.md](./task-distribution.md) before making code changes.
+
+The shared [task-distribution.md](./task-distribution.md) file defines the worker protocol only.
+The active distribution for a feature MUST live in that feature's own
+`specs/<feature>/task-distribution.md` file. Each generated spec directory MUST include this file,
+and workers MUST read the protocol document plus the active distribution file for the current spec
+before editing files. Each worker MUST create and use a dedicated git worktree on a new branch
+whose name clearly describes the overall goal of the assigned task bundle before editing files.
 
 ## Governance
 
@@ -137,8 +155,11 @@ arise between this document and any other guideline, this document prevails.
   - MINOR: New principle added or section materially expanded.
   - PATCH: Clarification, wording, or typo fix.
 - Amendments MUST update `Last Amended` date and increment `Version`.
+- When multi-agent task distribution is in use, the dispatcher MUST keep
+  the current spec's `task-distribution.md` current enough for any worker to recover its task
+  bundle, worktree path, and branch name before implementation continues.
 
 All implementation plans (`plan.md`) MUST include a "Constitution Check" section that validates
 the feature against these principles before Phase 0 research begins.
 
-**Version**: 1.2.0 | **Ratified**: 2026-03-23 | **Last Amended**: 2026-03-25
+**Version**: 1.4.0 | **Ratified**: 2026-03-23 | **Last Amended**: 2026-03-26
