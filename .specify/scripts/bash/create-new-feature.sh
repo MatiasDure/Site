@@ -306,6 +306,15 @@ else
     touch "$SPEC_FILE"
 fi
 
+TASK_DISTRIBUTION_TEMPLATE=$(resolve_template "task-distribution-template" "$REPO_ROOT") || true
+TASK_DISTRIBUTION_FILE="$FEATURE_DIR/task-distribution.md"
+if [ -n "$TASK_DISTRIBUTION_TEMPLATE" ] && [ -f "$TASK_DISTRIBUTION_TEMPLATE" ]; then
+    cp "$TASK_DISTRIBUTION_TEMPLATE" "$TASK_DISTRIBUTION_FILE"
+else
+    echo "Warning: Task distribution template not found; created empty task-distribution file" >&2
+    touch "$TASK_DISTRIBUTION_FILE"
+fi
+
 # Inform the user how to persist the feature variable in their own shell
 printf '# To persist: export SPECIFY_FEATURE=%q\n' "$BRANCH_NAME" >&2
 
