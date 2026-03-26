@@ -8,7 +8,11 @@ implemented by a single agent, this file can remain unchanged.
 
 - Worker protocol: `../../.specify/memory/task-distribution.md`
 - Dispatcher protocol: `../../.specify/memory/subagent-dispatch.md`
-- Update this file before launching workers and whenever assignments, branches, or worktrees change.
+- Update this file before launching workers and whenever assignments, branches, worktrees, or
+  prerequisite merge state change.
+- Record worktree paths as sibling directories beside `personal-website`, not nested inside it.
+- Record blocking bundles and the merge state they depend on in the Notes column so later workers
+  know whether they can branch yet.
 
 ## Active Distribution
 
