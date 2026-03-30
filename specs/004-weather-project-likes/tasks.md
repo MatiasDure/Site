@@ -81,13 +81,13 @@
 
 ### Implementation for User Story 3
 
-- [ ] T017 [P] [US3] Create the SQLite client bootstrap in db/client.ts
-- [ ] T018 [P] [US3] Define the `User`, `Project`, and `UserProjects` schema in db/schema.ts
-- [ ] T019 [US3] Implement deterministic Markdown-to-SQLite project synchronization in app/lib/project-sync.ts
-- [ ] T020 [US3] Implement Google Auth.js configuration, user upsert callbacks, and session shaping in app/lib/session.ts
-- [ ] T021 [US3] Add the Auth.js Google OAuth route handler in app/api/auth/[...nextauth]/route.ts
-- [ ] T022 [P] [US3] Create the reusable Google sign-in and sign-out control with callback support in app/components/auth/GoogleSignInButton.tsx
-- [ ] T023 [US3] Update app/components/NavBar.tsx to expose authenticated account actions without disrupting project browsing context
+- [X] T017 [P] [US3] Create the SQLite client bootstrap in db/client.ts
+- [X] T018 [P] [US3] Define the `User`, `Project`, and `UserProjects` schema in db/schema.ts
+- [X] T019 [US3] Implement deterministic Markdown-to-SQLite project synchronization in app/lib/project-sync.ts
+- [X] T020 [US3] Implement Google Auth.js configuration, user upsert callbacks, and session shaping in app/lib/session.ts
+- [X] T021 [US3] Add the Auth.js Google OAuth route handler in app/api/auth/[...nextauth]/route.ts
+- [X] T022 [P] [US3] Create the reusable Google sign-in and sign-out control with callback support in app/components/auth/GoogleSignInButton.tsx
+- [X] T023 [US3] Update app/components/NavBar.tsx to expose authenticated account actions without disrupting project browsing context
 
 **Checkpoint**: At this point, User Stories 1, 2, and 3 should all work independently
 
