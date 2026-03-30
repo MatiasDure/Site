@@ -12,9 +12,14 @@ const DOMAIN_LABELS: Record<Domain, string> = {
 interface DomainSectionProps {
   domain: Domain;
   featuredProjects: Project[];
+  isAuthenticated?: boolean;
 }
 
-export default function DomainSection({ domain, featuredProjects }: DomainSectionProps) {
+export default function DomainSection({
+  domain,
+  featuredProjects,
+  isAuthenticated = false,
+}: DomainSectionProps) {
   return (
     <section className="py-8" aria-labelledby={`heading-${domain}`}>
       <div className="mb-4 flex items-baseline justify-between">
@@ -33,7 +38,12 @@ export default function DomainSection({ domain, featuredProjects }: DomainSectio
       </div>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {featuredProjects.map((project) => (
-          <ProjectCard key={project.slug} project={project} domain={domain} />
+          <ProjectCard
+            key={project.slug}
+            project={project}
+            domain={domain}
+            isAuthenticated={isAuthenticated}
+          />
         ))}
       </div>
     </section>

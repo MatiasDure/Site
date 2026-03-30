@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { getAllProjects } from '@/app/lib';
+import { getAppSession } from '@/app/lib/session';
 import { ProjectCard } from '@/app/components';
 import type { Domain } from '@/app/types';
 
@@ -23,8 +24,9 @@ interface PageProps {
 export default async function DomainProjectsPage({ params }: PageProps) {
   const { domain } = await params;
   const typedDomain = domain as Domain;
+  const session = await getAppSession();
 
-  const projects = await getAllProjects(typedDomain);
+  const projects = await getAllProjects(typedDomain, session.user?.id ?? null);
 
   return (
     <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-10 text-foreground">
@@ -48,7 +50,12 @@ export default async function DomainProjectsPage({ params }: PageProps) {
       ) : (
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {projects.map((project) => (
-            <ProjectCard key={project.slug} project={project} domain={typedDomain} />
+            <ProjectCard
+              key={project.slug}
+              project={project}
+              domain={typedDomain}
+              isAuthenticated={session.isAuthenticated}
+            />
           ))}
         </div>
       )}

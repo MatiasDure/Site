@@ -1,22 +1,23 @@
 <!--
 SYNC IMPACT REPORT
 ==================
-Version change: 1.3.0 → 1.4.0
-Type: MINOR (moved active multi-agent distribution from shared memory to per-spec files)
+Version change: 2.0.0 → 2.1.0
+Type: MINOR (materially expanded multi-agent dispatch and merge workflow requirements)
 
-Modified principles: None
+Modified principles:
+- Multi-Agent Task Distribution section materially expanded
+
 Added sections: None
 Removed sections: None
 
 Templates requiring updates:
-- .specify/templates/plan-template.md              ✅ Updated spec directory layout and multi-agent gate
+- .specify/templates/plan-template.md              ✅ Reviewed; no structural change required
 - .specify/templates/spec-template.md              ✅ Reviewed; no structural changes required
-- .specify/templates/tasks-template.md             ✅ Updated multi-agent execution guidance
-- .specify/templates/task-distribution-template.md ✅ Added per-spec active distribution template
+- .specify/templates/tasks-template.md             ✅ Reviewed; existing task phase guidance already aligns
 - .specify/templates/commands/*.md                 ✅ Not present; no action required
-- .specify/scripts/bash/create-new-feature.sh      ✅ Updated spec scaffolding to generate per-spec distribution files
-- AGENTS.md                                        ✅ Updated runtime guidance to point at protocol + spec-local ledger
-- README.md                                        ✅ Reviewed; no changes required
+- .specify/memory/subagent-dispatch.md             ✅ Clarified dispatcher staging, worktree, commit, and merge rules
+- .specify/memory/task-distribution.md             ✅ Clarified worker commit and dependency-merge rules
+- specs/004-weather-project-likes/task-distribution.md ✅ No active dispatch yet; template remains sufficient
 
 Deferred TODOs: None.
 -->
@@ -25,15 +26,17 @@ Deferred TODOs: None.
 
 ## Core Principles
 
-### I. Static-First
+### I. Static-First Delivery
 
-Every page MUST be pre-renderable at build time using Next.js Static Site Generation (SSG) or
-Incremental Static Regeneration (ISR). No runtime server-side rendering with per-request
-computation is permitted unless explicitly justified. All pages MUST be deployable to a static
-CDN without a Node.js runtime.
+Public, cacheable, and non-personalized routes MUST use Static Site Generation (SSG) or
+Incremental Static Regeneration (ISR) by default. Runtime server logic is PERMITTED only for
+features that require authenticated identity, third-party OAuth callbacks, durable persistence,
+or per-user state. Runtime features MUST be isolated so unrelated public pages remain pre-rendered
+and cacheable.
 
-**Rationale**: A personal website has no dynamic per-user data requirements. Static output means
-zero cold-start latency, trivial CDN deployment, and maximum reliability.
+**Rationale**: Static delivery remains the default for a portfolio site's public experience, but
+modern portfolio features such as authenticated likes or OAuth-backed personalization require a
+small, controlled runtime surface instead of a blanket ban on server capabilities.
 
 ### II. TypeScript Strict Mode
 
@@ -103,19 +106,37 @@ Code MUST be written for humans first. The following rules apply:
 **Rationale**: A readable, well-structured codebase lowers the cost of every future change and
 makes the project approachable for collaborators or the author returning after months away.
 
+### VII. Server-Only Authenticated Features
+
+Authentication providers, access tokens, database clients, and authenticated mutations MUST
+execute on the server only. Durable user data MUST live in an explicitly declared persistence
+layer with a schema, uniqueness constraints, and a migration strategy. Authenticated mutations
+MUST validate identity, authorize the target resource, enforce domain invariants, and fail with
+safe user-facing errors that do not expose secrets or raw database details.
+
+**Rationale**: Once the project supports identity and persistence, the primary engineering risk is
+no longer whether runtime exists, but whether credentials, authorization, and data integrity stay
+contained to auditable server-side boundaries.
+
 ## Technology Stack
 
 - **Framework**: Next.js 16 (App Router)
 - **Language**: TypeScript 5 (`strict: true`)
 - **Styling**: TailwindCSS 4 (utility-first; configured via `postcss.config.mjs`)
-- **Runtime**: React 19
+- **Runtime**: React 19 with Node.js 20 LTS when runtime-backed features are enabled
+- **Persistence**: SQLite or another explicitly approved datastore MAY be used when features
+  require durable relational or user-specific data
+- **Authentication**: OAuth-based providers MAY be used when features require user identity;
+  custom credential flows require explicit justification
 - **Linting**: ESLint 9 with `eslint-config-next`
-- **Deployment target**: Vercel or any static CDN via `next build`
+- **Deployment target**: Vercel or another Next.js-capable host; static CDN-only deployment is
+  allowed only when runtime-backed features are not enabled
 - **Node requirement**: ≥ 20 LTS
 
-No backend API routes, databases, or authentication systems are in scope. Third-party dependency
-additions MUST be minimized — prefer native browser APIs and Next.js built-ins before adding
-new packages. Each new package addition MUST be justified in the PR description.
+Backend route handlers, server actions, databases, and authentication systems are PERMITTED when
+justified by feature requirements. Third-party dependency additions MUST be minimized — prefer
+native browser APIs and Next.js built-ins before adding new packages. Each new package addition
+MUST be justified in the PR description, and secrets or credentials MUST remain server-only.
 
 ## Development Workflow
 
@@ -123,11 +144,14 @@ new packages. Each new package addition MUST be justified in the PR description.
    are FORBIDDEN.
 2. **Local development**: `npm run dev` for hot-reload development server.
 3. **Lint gate**: `npm run lint` MUST exit with zero errors before any PR is merged.
-4. **Build gate**: `npm run build` MUST succeed (no TypeScript errors, no broken static export)
+4. **Build gate**: `npm run build` MUST succeed (no TypeScript errors, no broken production
+  build output)
    before any PR is merged.
 5. All components MUST live under `app/` following Next.js App Router conventions. Shared
    components belong in `app/components/`; page-specific components co-locate with their page
    segment directory.
+6. Features that introduce authentication, persistence, or authenticated mutations MUST document
+  required environment variables, migration steps, and local verification in `quickstart.md`.
 
 ## Multi-Agent Task Distribution
 
@@ -143,6 +167,19 @@ The active distribution for a feature MUST live in that feature's own
 and workers MUST read the protocol document plus the active distribution file for the current spec
 before editing files. Each worker MUST create and use a dedicated git worktree on a new branch
 whose name clearly describes the overall goal of the assigned task bundle before editing files.
+Those worktrees MUST be created as siblings of `personal-website`, not nested inside the
+repository.
+
+The dispatcher MUST identify blocking bundles before launching parallel workers. If one bundle is
+foundational or otherwise unlocks later work, that blocking bundle MUST be implemented, committed,
+and merged back into the active feature branch before any dependent workers are dispatched.
+Unrelated, non-blocked bundles MAY run in parallel only after the dispatcher verifies they do not
+share blocking dependencies or same-file ownership.
+
+Every worker-owned bundle MUST end with a commit on the worker branch using a short, specific
+message. Completed worker branches MUST then be merged back into the active feature branch in
+dependency order so later workers branch from the latest committed integration point instead of an
+outdated baseline.
 
 ## Governance
 
@@ -162,4 +199,4 @@ arise between this document and any other guideline, this document prevails.
 All implementation plans (`plan.md`) MUST include a "Constitution Check" section that validates
 the feature against these principles before Phase 0 research begins.
 
-**Version**: 1.4.0 | **Ratified**: 2026-03-23 | **Last Amended**: 2026-03-26
+**Version**: 2.1.0 | **Ratified**: 2026-03-23 | **Last Amended**: 2026-03-30

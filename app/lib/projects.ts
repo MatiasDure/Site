@@ -1,69 +1,52 @@
-import fs from 'fs/promises';
-import path from 'path';
-import matter from 'gray-matter';
-import { remark } from 'remark';
-import remarkRehype from 'remark-rehype';
-import rehypeSanitize from 'rehype-sanitize';
-import rehypeStringify from 'rehype-stringify';
+import { getProjectLikeSnapshots } from '@/app/lib/likes';
+import { getMarkdownProject, getMarkdownProjects } from '@/app/lib/project-content';
+import { getProjectId } from '@/app/lib/project-sync';
 import type { Domain, Project } from '@/app/types';
+async function attachProjectLikes(projects: Project[], viewerUserId: string | null) {
+  if (projects.length === 0) {
+    return projects;
+  }
 
-const PROJECTS_ROOT = path.join(process.cwd(), 'projects');
+  const projectsWithIds = projects.map((project) => ({
+    ...project,
+    id: project.id ?? getProjectId(project.domain, project.slug),
+  }));
 
-async function markdownToHtml(content: string): Promise<string> {
-  const result = await remark()
-    .use(remarkRehype)
-    .use(rehypeSanitize)
-    .use(rehypeStringify)
-    .process(content);
-  return String(result);
-}
-
-async function readProjectFile(domain: Domain, filename: string): Promise<Project> {
-  const filePath = path.join(PROJECTS_ROOT, domain, filename);
-  const raw = await fs.readFile(filePath, 'utf8');
-  const { data, content } = matter(raw);
-  const slug = filename.replace(/\.md$/, '');
-  const htmlBody = await markdownToHtml(content);
-
-  return {
-    slug,
-    domain,
-    title: String(data.title ?? ''),
-    description: String(data.description ?? ''),
-    coverImage: String(data.coverImage ?? '/images/projects/placeholder.png'),
-    tags: Array.isArray(data.tags) ? (data.tags as string[]) : [],
-    featured: Boolean(data.featured),
-    demo: data.demo ? String(data.demo) : undefined,
-    repo: data.repo ? String(data.repo) : undefined,
-    htmlBody,
-  };
-}
-
-export async function getAllProjects(domain?: Domain): Promise<Project[]> {
-  const domains: Domain[] = domain ? [domain] : ['web', 'app', 'game', 'embedded'];
-
-  const projectsPerDomain = await Promise.all(
-    domains.map(async (d) => {
-      const dir = path.join(PROJECTS_ROOT, d);
-      let files: string[];
-      try {
-        files = await fs.readdir(dir);
-      } catch {
-        return [];
-      }
-      const mdFiles = files.filter((f) => f.endsWith('.md'));
-      return Promise.all(mdFiles.map((f) => readProjectFile(d, f)));
-    })
+  const likeSnapshots = await getProjectLikeSnapshots(
+    projectsWithIds.map((project) => project.id as string),
+    viewerUserId,
   );
 
-  return projectsPerDomain.flat();
+  return projectsWithIds.map((project) => {
+    const snapshot = likeSnapshots.get(project.id as string);
+
+    return {
+      ...project,
+      totalLikes: snapshot?.totalLikes ?? 0,
+      likedByViewer: snapshot?.likedByViewer ?? false,
+    };
+  });
 }
 
-export async function getProject(domain: Domain, slug: string): Promise<Project> {
-  return readProjectFile(domain, `${slug}.md`);
+export async function getAllProjects(domain?: Domain, viewerUserId: string | null = null): Promise<Project[]> {
+  const projects = await getMarkdownProjects(domain);
+  return attachProjectLikes(projects, viewerUserId);
 }
 
-export async function getFeaturedProjects(domain: Domain): Promise<Project[]> {
-  const all = await getAllProjects(domain);
+export async function getProject(
+  domain: Domain,
+  slug: string,
+  viewerUserId: string | null = null,
+): Promise<Project> {
+  const project = await getMarkdownProject(domain, slug);
+  const [projectWithLikes] = await attachProjectLikes([project], viewerUserId);
+  return projectWithLikes;
+}
+
+export async function getFeaturedProjects(
+  domain: Domain,
+  viewerUserId: string | null = null,
+): Promise<Project[]> {
+  const all = await getAllProjects(domain, viewerUserId);
   return all.filter((p) => p.featured).slice(0, 3);
 }
