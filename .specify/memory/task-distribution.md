@@ -41,8 +41,13 @@ that spec-local file, and every worker reads that spec-local file before impleme
 8. The branch name MUST be clear, lowercase, and representative of the overall goal of the tasks
    you are implementing, for example `feat-theme-toggle-layout`.
 9. Work ONLY inside that worktree and ONLY on the task bundle assigned to you.
-10. If the assignment changes, re-read the spec-local distribution file before continuing.
-11. If you find cross-bundle file overlap, dependency ambiguity, or blockers that require task
+10. When the assigned bundle is complete, commit the work on your assigned branch with a short,
+   specific message that describes the delivered outcome.
+11. Hand the completed branch back for merge into the active feature branch. If later bundles were
+   blocked on your work, they MUST wait until this merge is finished and the dispatcher updates the
+   spec-local distribution file.
+12. If the assignment changes, re-read the spec-local distribution file before continuing.
+13. If you find cross-bundle file overlap, dependency ambiguity, or blockers that require task
    reshaping, stop and hand the issue back to the dispatcher.
 
 ## Assignment Rules
@@ -51,6 +56,9 @@ that spec-local file, and every worker reads that spec-local file before impleme
 - Task bundles MUST group work that belongs together and can progress without same-file conflicts.
 - Blocking or foundational tasks MUST be completed first on `###-feature-branch`. After they are
    merged, new worktrees MUST branch from that updated commit before dependent work continues.
+- Worktrees MUST be created as siblings of `personal-website`, never inside the repository root.
+- Completed worker branches MUST be committed and then merged back into `###-feature-branch`
+   before dependent bundles continue.
 - The dispatcher owns reassignment, rebundling, and conflict resolution.
 - Workers MUST NOT edit another worker's branch, worktree, or assigned files unless the dispatcher
   updates the spec-local `task-distribution.md` first.
@@ -63,3 +71,5 @@ Every `specs/<feature>/task-distribution.md` file MUST include:
 - An active assignment table with worker, goal, task bundle, branch, worktree path, status, and notes.
 - Enough current detail for any worker to recover their task bundle, worktree, base feature branch,
   and prerequisite sequencing without guesswork.
+- Clear notes when a bundle is blocked, what it depends on, and whether the dependency has already
+   been merged into the active feature branch.

@@ -1,25 +1,23 @@
 <!--
 SYNC IMPACT REPORT
 ==================
-Version change: 1.4.0 → 2.0.0
-Type: MAJOR (redefined deployment and stack governance to allow server-side auth, databases, and authenticated mutations)
+Version change: 2.0.0 → 2.1.0
+Type: MINOR (materially expanded multi-agent dispatch and merge workflow requirements)
 
 Modified principles:
-- I. Static-First → I. Static-First Delivery
-- Added VII. Server-Only Authenticated Features
+- Multi-Agent Task Distribution section materially expanded
 
 Added sections: None
 Removed sections: None
 
 Templates requiring updates:
-- .specify/templates/plan-template.md              ✅ Updated constitution gates for runtime/authenticated features
+- .specify/templates/plan-template.md              ✅ Reviewed; no structural change required
 - .specify/templates/spec-template.md              ✅ Reviewed; no structural changes required
-- .specify/templates/tasks-template.md             ✅ Reviewed; existing auth/database foundation guidance already aligns
+- .specify/templates/tasks-template.md             ✅ Reviewed; existing task phase guidance already aligns
 - .specify/templates/commands/*.md                 ✅ Not present; no action required
-- specs/004-weather-project-likes/plan.md          ✅ Updated stale constitution-failure checks to align with amended rules
-- README.md                                        ✅ Reviewed; no changes required
-- AGENTS.md                                        ✅ Reviewed; no changes required
-- .github/agents/copilot-instructions.md           ✅ Reviewed; no changes required
+- .specify/memory/subagent-dispatch.md             ✅ Clarified dispatcher staging, worktree, commit, and merge rules
+- .specify/memory/task-distribution.md             ✅ Clarified worker commit and dependency-merge rules
+- specs/004-weather-project-likes/task-distribution.md ✅ No active dispatch yet; template remains sufficient
 
 Deferred TODOs: None.
 -->
@@ -169,6 +167,19 @@ The active distribution for a feature MUST live in that feature's own
 and workers MUST read the protocol document plus the active distribution file for the current spec
 before editing files. Each worker MUST create and use a dedicated git worktree on a new branch
 whose name clearly describes the overall goal of the assigned task bundle before editing files.
+Those worktrees MUST be created as siblings of `personal-website`, not nested inside the
+repository.
+
+The dispatcher MUST identify blocking bundles before launching parallel workers. If one bundle is
+foundational or otherwise unlocks later work, that blocking bundle MUST be implemented, committed,
+and merged back into the active feature branch before any dependent workers are dispatched.
+Unrelated, non-blocked bundles MAY run in parallel only after the dispatcher verifies they do not
+share blocking dependencies or same-file ownership.
+
+Every worker-owned bundle MUST end with a commit on the worker branch using a short, specific
+message. Completed worker branches MUST then be merged back into the active feature branch in
+dependency order so later workers branch from the latest committed integration point instead of an
+outdated baseline.
 
 ## Governance
 
@@ -188,4 +199,4 @@ arise between this document and any other guideline, this document prevails.
 All implementation plans (`plan.md`) MUST include a "Constitution Check" section that validates
 the feature against these principles before Phase 0 research begins.
 
-**Version**: 2.0.0 | **Ratified**: 2026-03-23 | **Last Amended**: 2026-03-30
+**Version**: 2.1.0 | **Ratified**: 2026-03-23 | **Last Amended**: 2026-03-30
