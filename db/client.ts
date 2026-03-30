@@ -18,7 +18,7 @@ function resolveDatabasePath() {
     return configuredPath;
   }
 
-  return path.join(process.cwd(), configuredPath);
+  return path.join(/* turbopackIgnore: true */ process.cwd(), configuredPath);
 }
 
 function createDatabaseClient() {

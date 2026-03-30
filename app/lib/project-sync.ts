@@ -2,7 +2,7 @@ import 'server-only';
 
 import fs from 'fs/promises';
 import path from 'path';
-import { getAllProjects } from '@/app/lib/projects';
+import { getMarkdownProjects } from '@/app/lib/project-content';
 import type { Domain, PersistedProjectRecord, Project } from '@/app/types';
 import { getDatabase } from '@/db/client';
 
@@ -164,7 +164,7 @@ function synchronizeRecords(records: PersistedProjectRecord[]) {
 }
 
 async function runSynchronization(manifest: string): Promise<ProjectSyncResult> {
-  const projects = await getAllProjects();
+  const projects = await getMarkdownProjects();
   const persistedRecords = projects.map(mapProjectToPersistedRecord);
 
   synchronizeRecords(persistedRecords);

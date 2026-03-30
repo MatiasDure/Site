@@ -32,9 +32,9 @@
 ### Scenario 2: GitHub activity graph renders for the past year
 
 1. Open the homepage section that contains GitHub activity.
-2. Confirm the `activity-graph` component renders in a calendar-style columns-by-rows layout.
+2. Confirm the GitHub activity calendar renders in a calendar-style columns-by-rows layout.
 3. Confirm days with no contributions are still visible as empty or low-activity cells.
-4. Confirm the graph styling follows the site's active theme through package theme classes or CSS variable overrides.
+4. Confirm the graph styling follows the site's active theme through the contribution calendar theme colors.
 5. Simulate or force an unavailable GitHub response.
 6. Confirm the grid area falls back to a clear unavailable state.
 
@@ -44,7 +44,7 @@
 2. Attempt to like a project from a project card.
 3. Confirm the site routes the user into Google sign-in rather than recording the like.
 4. Complete Google sign-in.
-5. Confirm the user returns to a meaningful project-browsing context.
+5. Confirm the user returns to the page where the like was attempted.
 
 ### Scenario 4: Likes stay consistent across cards and detail pages
 
@@ -54,6 +54,7 @@
 4. Confirm the project detail page reflects the same liked state.
 5. Remove the like from the detail page.
 6. Return to the card view and confirm the unliked state and like count stay in sync.
+7. Repeat the card flow from a domain listing page and confirm the same state is shown there.
 
 ### Scenario 5: Project sync keeps Markdown content aligned with SQLite rows
 
@@ -66,6 +67,7 @@
 1. Run `npm run lint`.
 2. Run `npm run build`.
 3. Re-run the manual scenarios above after both commands succeed.
+4. If local Spotify credentials are missing, confirm the build still completes and that the like flow remains unaffected.
 
 ## Notes
 

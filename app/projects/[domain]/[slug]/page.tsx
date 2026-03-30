@@ -2,6 +2,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import type { Metadata } from 'next';
 import { getAllProjects, getProject } from '@/app/lib';
+import ProjectLikeButton from '@/app/components/ProjectLikeButton';
+import { getAppSession, isGoogleAuthConfigured } from '@/app/lib/session';
 import type { Domain } from '@/app/types';
 
 const DOMAIN_LABELS: Record<Domain, string> = {
@@ -39,7 +41,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function ProjectDetailPage({ params }: PageProps) {
   const { domain, slug } = await params;
   const typedDomain = domain as Domain;
-  const project = await getProject(typedDomain, slug);
+  const session = await getAppSession();
+  const project = await getProject(typedDomain, slug, session.user?.id ?? null);
 
   return (
     <main className="mx-auto w-full max-w-3xl flex-1 px-4 py-10 text-foreground">
@@ -71,6 +74,18 @@ export default async function ProjectDetailPage({ params }: PageProps) {
         <p className="mt-3 text-lg text-muted-foreground">
           {project.description}
         </p>
+
+        {project.id ? (
+          <div className="mt-5">
+            <ProjectLikeButton
+              authEnabled={isGoogleAuthConfigured}
+              initialLikedByViewer={project.likedByViewer}
+              initialTotalLikes={project.totalLikes}
+              isAuthenticated={session.isAuthenticated}
+              projectId={project.id}
+            />
+          </div>
+        ) : null}
 
         {project.tags.length > 0 && (
           <div className="mt-4 flex flex-wrap gap-2">

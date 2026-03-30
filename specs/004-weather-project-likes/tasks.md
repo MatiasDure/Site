@@ -101,12 +101,12 @@
 
 ### Implementation for User Story 4
 
-- [ ] T024 [US4] Implement session-aware like snapshot queries and toggle logic in app/lib/likes.ts
-- [ ] T025 [US4] Update app/lib/projects.ts to attach stable project IDs and persisted like data to project list and detail lookups
-- [ ] T026 [P] [US4] Build the authenticated like button with sign-in fallback in app/components/ProjectLikeButton.tsx
-- [ ] T027 [US4] Refactor app/components/ProjectCard.tsx to render ProjectLikeButton.tsx without breaking card navigation
-- [ ] T028 [US4] Update app/page.tsx and app/projects/[domain]/page.tsx to supply like-aware project data to project cards
-- [ ] T029 [US4] Update app/projects/[domain]/[slug]/page.tsx to render the detail-page like state, total, and toggle flow
+- [X] T024 [US4] Implement session-aware like snapshot queries and toggle logic in app/lib/likes.ts
+- [X] T025 [US4] Update app/lib/projects.ts to attach stable project IDs and persisted like data to project list and detail lookups
+- [X] T026 [P] [US4] Build the authenticated like button with sign-in fallback in app/components/ProjectLikeButton.tsx
+- [X] T027 [US4] Refactor app/components/ProjectCard.tsx to render ProjectLikeButton.tsx without breaking card navigation
+- [X] T028 [US4] Update app/page.tsx and app/projects/[domain]/page.tsx to supply like-aware project data to project cards
+- [X] T029 [US4] Update app/projects/[domain]/[slug]/page.tsx to render the detail-page like state, total, and toggle flow
 
 **Checkpoint**: All user stories should now be independently functional
 
@@ -116,8 +116,8 @@
 
 **Purpose**: Validate the integrated experience and align verification docs with the delivered runtime behavior
 
-- [ ] T030 [P] Update the validation flow and environment notes in specs/004-weather-project-likes/quickstart.md
-- [ ] T031 Run `npm run lint` and `npm run build` and resolve feature-specific issues across package.json, app/lib/, app/components/, app/projects/, app/api/auth/[...nextauth]/route.ts, and db/
+- [X] T030 [P] Update the validation flow and environment notes in specs/004-weather-project-likes/quickstart.md
+- [X] T031 Run `npm run lint` and `npm run build` and resolve feature-specific issues across package.json, app/lib/, app/components/, app/projects/, app/api/auth/[...nextauth]/route.ts, and db/
 
 ---
 
