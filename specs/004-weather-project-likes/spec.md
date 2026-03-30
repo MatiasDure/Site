@@ -3,7 +3,7 @@
 **Feature Branch**: `004-weather-project-likes`  
 **Created**: 2026-03-26  
 **Status**: Draft  
-**Input**: User description: "The personal website should include the current weather of Enschede, The Netherlands. Projects should be able to be liked by users. For this, users should be able to create accounts and log in, to like the projects. The projects should be able to be liked from the project cards or their respective pages. Add that the website should also have all GitHub commits from all repositories in the past year, displayed in a columns x row manner similar to GitHub's contribution component."
+**Input**: User description: "The personal website should include the current weather of Enschede, The Netherlands. Projects should be able to be liked by users. For this, users should be able to create accounts and log in, to like the projects. The projects should be able to be liked from the project cards or their respective pages. The website should also include GitHub commits from all repositories in the past year, displayed in a "columns x rows" manner similar to GitHub's contribution component."
 
 ## User Scenarios & Testing *(mandatory)*
 

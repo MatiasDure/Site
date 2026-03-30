@@ -33,12 +33,13 @@
 
 | Gate | Principle | Status |
 |------|-----------|--------|
-| All new pages are statically pre-renderable (no per-request server logic) | I. Static-First | ☐ |
+| Public and cacheable content remains pre-renderable by default; runtime logic is isolated to authenticated or persistence-dependent flows | I. Static-First Delivery | ☐ |
 | No `any` types; `strict: true` remains enabled in tsconfig.json | II. TypeScript Strict Mode | ☐ |
 | All styling uses TailwindCSS utility classes; no new CSS files outside globals.css | III. TailwindCSS for All Styling | ☐ |
 | `"use client"` used only where browser APIs / stateful hooks are strictly required | IV. Server Components by Default | ☐ |
 | Semantic HTML used; images go via `<Image>`; interactive elements are keyboard-accessible | V. Accessibility & Performance | ☐ |
 | No new third-party packages added without documented justification | Technology Stack | ☐ |
+| Authentication, database access, and authenticated mutations are server-only and justified by explicit feature requirements | VII. Server-Only Authenticated Features | ☐ |
 | Names are descriptive; components have a single responsibility; no commented-out code | VI. Readability, Clarity & Architecture | ☐ |
 | Magic values are extracted into descriptive constants files instead of floating in components | VI. Readability, Clarity & Architecture | ☐ |
 | No premature abstractions; new abstractions justified by 3+ repetitions | VI. Readability, Clarity & Architecture | ☐ |
