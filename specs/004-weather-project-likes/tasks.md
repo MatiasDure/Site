@@ -47,9 +47,9 @@
 
 ### Implementation for User Story 1
 
-- [ ] T009 [US1] Implement Open-Meteo weather fetching and unavailable-state normalization in app/lib/open-meteo.ts
-- [ ] T010 [P] [US1] Build the visitor-facing weather card component in app/components/WeatherCard.tsx
-- [ ] T011 [US1] Update app/components/ActivitySection.tsx to load the weather snapshot and render WeatherCard.tsx with fallback messaging
+- [X] T009 [US1] Implement Open-Meteo weather fetching and unavailable-state normalization in app/lib/open-meteo.ts
+- [X] T010 [P] [US1] Build the visitor-facing weather card component in app/components/WeatherCard.tsx
+- [X] T011 [US1] Update app/components/ActivitySection.tsx to load the weather snapshot and render WeatherCard.tsx with fallback messaging
 
 **Checkpoint**: At this point, User Story 1 should be fully functional and testable independently
 
@@ -63,11 +63,11 @@
 
 ### Implementation for User Story 2
 
-- [ ] T012 [US2] Implement GitHub GraphQL contribution fetching and full-year normalization in app/lib/github.ts
-- [ ] T013 [P] [US2] Create the server-side contribution graph wrapper in app/components/GitHubActivityGraph.tsx
-- [ ] T014 [P] [US2] Create the custom-element registration wrapper for `activity-graph` in app/components/GitHubActivityGraphClient.tsx
-- [ ] T015 [US2] Add `activity-graph` theme variables and contribution-grid styling hooks to app/globals.css
-- [ ] T016 [US2] Update app/components/ActivitySection.tsx to render the GitHub contribution graph or unavailable state with the new wrappers
+- [X] T012 [US2] Implement GitHub GraphQL contribution fetching and full-year normalization in app/lib/github.ts
+- [X] T013 [P] [US2] Create the server-side contribution graph wrapper in app/components/GitHubActivityGraph.tsx
+- [X] T014 [P] [US2] Create the custom-element registration wrapper for `activity-graph` in app/components/GitHubActivityGraphClient.tsx
+- [X] T015 [US2] Add `activity-graph` theme variables and contribution-grid styling hooks to app/globals.css
+- [X] T016 [US2] Update app/components/ActivitySection.tsx to render the GitHub contribution graph or unavailable state with the new wrappers
 
 **Checkpoint**: At this point, User Stories 1 and 2 should both work independently
 

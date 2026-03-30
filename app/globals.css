@@ -78,3 +78,69 @@ body {
   color: var(--foreground);
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
 }
+
+activity-graph.contribution-graph {
+  --activity-graph-rounded: 0.25rem;
+  --activity-graph-font-size: 0.75rem;
+  --activity-graph-text-weight: 500;
+  --activity-graph-text-color: var(--muted-foreground);
+  display: block;
+  width: 100%;
+}
+
+activity-graph.contribution-graph figure {
+  width: 100%;
+}
+
+activity-graph.contribution-graph table {
+  min-width: max-content;
+}
+
+html[data-theme='light'] activity-graph.contribution-graph,
+activity-graph.contribution-graph.activity-graph-light {
+  --activity-graph-level-0-bg: #e8edf2;
+  --activity-graph-level-0-border: rgba(24, 24, 27, 0.08);
+  --activity-graph-level-1-bg: #c7e4d1;
+  --activity-graph-level-1-border: rgba(24, 24, 27, 0.08);
+  --activity-graph-level-2-bg: #82c89a;
+  --activity-graph-level-2-border: rgba(24, 24, 27, 0.08);
+  --activity-graph-level-3-bg: #3f9961;
+  --activity-graph-level-3-border: rgba(24, 24, 27, 0.08);
+  --activity-graph-level-4-bg: #1f6f43;
+  --activity-graph-level-4-border: rgba(24, 24, 27, 0.08);
+  --activity-graph-disabled-bg: transparent;
+  --activity-graph-disabled-border: rgba(24, 24, 27, 0.08);
+}
+
+html[data-theme='dark'] activity-graph.contribution-graph,
+activity-graph.contribution-graph.activity-graph-dark {
+  --activity-graph-level-0-bg: #22262c;
+  --activity-graph-level-0-border: rgba(244, 244, 245, 0.1);
+  --activity-graph-level-1-bg: #1a5537;
+  --activity-graph-level-1-border: rgba(244, 244, 245, 0.1);
+  --activity-graph-level-2-bg: #218b5b;
+  --activity-graph-level-2-border: rgba(244, 244, 245, 0.1);
+  --activity-graph-level-3-bg: #32b56f;
+  --activity-graph-level-3-border: rgba(244, 244, 245, 0.1);
+  --activity-graph-level-4-bg: #58d68c;
+  --activity-graph-level-4-border: rgba(244, 244, 245, 0.1);
+  --activity-graph-disabled-bg: transparent;
+  --activity-graph-disabled-border: rgba(244, 244, 245, 0.1);
+}
+
+@media (prefers-color-scheme: dark) {
+  activity-graph.contribution-graph.activity-graph-auto {
+    --activity-graph-level-0-bg: #22262c;
+    --activity-graph-level-0-border: rgba(244, 244, 245, 0.1);
+    --activity-graph-level-1-bg: #1a5537;
+    --activity-graph-level-1-border: rgba(244, 244, 245, 0.1);
+    --activity-graph-level-2-bg: #218b5b;
+    --activity-graph-level-2-border: rgba(244, 244, 245, 0.1);
+    --activity-graph-level-3-bg: #32b56f;
+    --activity-graph-level-3-border: rgba(244, 244, 245, 0.1);
+    --activity-graph-level-4-bg: #58d68c;
+    --activity-graph-level-4-border: rgba(244, 244, 245, 0.1);
+    --activity-graph-disabled-bg: transparent;
+    --activity-graph-disabled-border: rgba(244, 244, 245, 0.1);
+  }
+}

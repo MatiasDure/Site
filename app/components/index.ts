@@ -7,4 +7,7 @@ export { default as SocialLinks } from './SocialLinks';
 export { default as ActivitySection } from './ActivitySection';
 export { default as SpotifyCard } from './SpotifyCard';
 export { default as AnimeCard } from './AnimeCard';
+export { default as WeatherCard } from './WeatherCard';
+export { default as GitHubActivityGraph } from './GitHubActivityGraph';
+export { default as GitHubActivityGraphClient } from './GitHubActivityGraphClient';
 export { default as ThemeToggle } from './ThemeToggle';
