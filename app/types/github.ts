@@ -19,9 +19,6 @@ export interface AvailableGitHubContributionGrid extends GitHubContributionGridB
   status: 'available';
   days: GitHubContributionDay[];
   totalContributions: number;
-  activityData: string;
-  activityLevels: string;
-  firstDayOfWeek: 1;
 }
 
 export interface UnavailableGitHubContributionGrid extends GitHubContributionGridBase {

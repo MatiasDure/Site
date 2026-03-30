@@ -41,11 +41,7 @@ export default function GitHubActivityGraph({ grid }: GitHubActivityGraphProps) 
 
       <div className="mt-4 overflow-x-auto">
         <GitHubActivityGraphClient
-          activityData={grid.activityData}
-          activityLevels={grid.activityLevels}
-          endedAt={grid.endedAt}
-          firstDayOfWeek={grid.firstDayOfWeek}
-          startedAt={grid.startedAt}
+          days={grid.days}
         />
       </div>
     </div>

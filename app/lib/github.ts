@@ -112,18 +112,6 @@ function getActivityLevel(contributionCount: number): GitHubActivityLevel {
   return 'none';
 }
 
-function buildActivityData(days: GitHubContributionDay[]): string {
-  const activityDates: string[] = [];
-
-  for (const day of days) {
-    for (let index = 0; index < day.contributionCount; index += 1) {
-      activityDates.push(day.date);
-    }
-  }
-
-  return activityDates.join(',');
-}
-
 function normalizeContributionDays(
   rawDays: Array<{
     contributionCount?: number;
@@ -239,9 +227,6 @@ export async function getGitHubContributionGrid(): Promise<GitHubContributionGri
       status: 'available',
       days,
       totalContributions,
-      activityData: buildActivityData(days),
-      activityLevels: GITHUB_ACTIVITY_LEVEL_THRESHOLDS.join(','),
-      firstDayOfWeek: 1,
     };
 
     return availableGrid;
